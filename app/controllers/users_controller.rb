@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   def index
-    @users = User.all
+    @users = User.paginate(page: params[:page], per_page: 5)
   end
 
 
@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
 
     if @user.save
-      flash[:success] = "welcome to the αblgo, #{@user.username}"
+      flash[:success] = "Welcome to the αblog, #{@user.username}"
       redirect_to articles_path
     else
       render 'new'
@@ -36,6 +36,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
+    @user_articles = @user.articles.paginate(page: params[:page], per_page: 5)
   end
 
 
