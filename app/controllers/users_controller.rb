@@ -42,8 +42,10 @@ class UsersController < ApplicationController
 
   def destroy
     @user = User.find(params[:id])
+    @user.destroy
+    flash[:danger] = "User and all articles have been deleted"
+    redirect_to users_path
   end
-
 
   private
   def user_params
@@ -51,9 +53,6 @@ class UsersController < ApplicationController
   end
   def set_user
     @user = User.find(params[:id])
-    @user.destroy
-    flash[:danger] = "User and all articles have been deleted"
-    redirect_to users_path
 
   end
   def require_same_user
