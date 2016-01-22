@@ -7,7 +7,6 @@ class ListCategoryTest < ActionDispatch::IntegrationTest
     @category2 = Category.create(name: "progrmaming")
   end
 
-
     test "should show categories listing" do
       get categories_path
       assert_template 'categories/index'
